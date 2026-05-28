@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Справка 2-НДФЛ</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        h1, h2 { text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .total { font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Справка 2-НДФЛ</h1>
+    <h2>за {{ year }} год</h2>
+
+    <h3>Сведения о доходе физического лица</h3>
+    <table>
+        <tr><th>ФИО</th><td colspan="3">{{ employee_name }}</td></tr>
+        <tr><th>ИНН</th><td>{{ employee_inn|default:"__________" }}</td><th>Дата рождения</th><td>{{ employee_birth_date|default:"__________" }}</td></tr>
+    </table>
+
+    <h3>Сведения о налоговом агенте</h3>
+    <table>
+        <tr><th>Наименование</th><td colspan="3">{{ enterprise_name }}</td></tr>
+        <tr><th>ИНН</th><td>{{ enterprise_inn }}</td><th>КПП</th><td>{{ enterprise_kpp|default:"__________" }}</td></tr>
+    </table>
+
+    <h3>Сведения о доходах по месяцам</h3>
+    <table>
+        <tr>
+            <th>Месяц</th>
+            <th>Код дохода</th>
+            <th>Сумма дохода (руб.)</th>
+            <th>Код вычета</th>
+            <th>Сумма вычета (руб.)</th>
+        </tr>
+        {% for month in monthly_income %}
+        <tr>
+            <td>{{ month.name }}</td>
+            <td>2000</td>
+            <td>{{ month.amount }}</td>
+            <td>{% if month.deduction %}114{% else %}-{% endif %}</td>
+            <td>{{ month.deduction|default:"0" }}</td>
+        </tr>
+        {% endfor %}
+        <tr style="font-weight: bold;">
+            <td colspan="2">Итого:</td>
+            <td>{{ total_income }}</td>
+            <td></td>
+            <td>{{ total_deduction|default:"0" }}</td>
+        </tr>
+    </table>
+
+    <h3>Расчёт налога</h3>
+    <table>
+        <tr><th>Облагаемая сумма (руб.)</th><td>{{ taxable_income }}</td></tr>
+        <tr><th>Ставка налога (%)</th><td>{{ tax_rate }}</td></tr>
+        <tr><th>Сумма налога исчисленная (руб.)</th><td>{{ tax_amount }}</td></tr>
+        <tr><th>Сумма налога удержанная (руб.)</th><td>{{ tax_amount }}</td></tr>
+    </table>
+
+    <p class="total">Дата формирования: {{ generation_date }}</p>
+    <p>Ответственное лицо: __________________</p>
+</body>
+</html>

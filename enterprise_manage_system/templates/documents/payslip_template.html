@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Расчётный листок</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        h1 { text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .total { font-weight: bold; margin-top: 20px; text-align: right; }
+    </style>
+</head>
+<body>
+    <h1>РАСЧЁТНЫЙ ЛИСТОК</h1>
+    <h2>за {{ month }}</h2>
+
+    <p><strong>Сотрудник:</strong> {{ employee_name }}</p>
+    <p><strong>Должность:</strong> {{ position }}</p>
+    {% if department %}
+    <p><strong>Отдел:</strong> {{ department }}</p>
+    {% endif %}
+
+    <h3>Начисления:</h3>
+    <table>
+        <tr>
+            <th>Вид начисления</th>
+            <th>Ставка</th>
+            <th>Сумма (руб.)</th>
+        </tr>
+        {% for detail in payroll_details %}
+        <tr>
+            <td>{{ detail.type }}</td>
+            <td>{{ detail.rate }}</td>
+            <td>{{ detail.salary }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div class="total">
+        <p>ИТОГО НАЧИСЛЕНО: {{ total }} руб.</p>
+    </div>
+
+    <p>Дата формирования: {{ generation_date }}</p>
+    <p>Подпись бухгалтера: __________________</p>
+</body>
+</html>

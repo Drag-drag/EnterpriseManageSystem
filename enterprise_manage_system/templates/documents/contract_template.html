@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Трудовой договор</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        h1 { text-align: center; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .content { margin-top: 20px; }
+        .signature { margin-top: 50px; }
+        .signature-line { display: inline-block; width: 200px; border-bottom: 1px solid black; margin: 0 20px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>ТРУДОВОЙ ДОГОВОР № {{ contract_number }}</h1>
+        <p>г. {{ city }} {{ date }}</p>
+    </div>
+
+    <div class="content">
+        <p><strong>{{ enterprise_name }}</strong> (ИНН: {{ enterprise_inn }}, ОГРН: {{ enterprise_ogrn }}),
+        именуемое в дальнейшем «Работодатель», с одной стороны, и
+        <strong>{{ employee_name }}</strong>, именуемый в дальнейшем «Работник»,
+        с другой стороны, заключили настоящий договор о нижеследующем:</p>
+
+        <h3>1. ПРЕДМЕТ ДОГОВОРА</h3>
+        <p>1.1. Работник принимается на должность <strong>{{ position }}</strong>.</p>
+        {% if department %}
+        <p>1.2. Место работы: отдел {{ department }}.</p>
+        {% endif %}
+
+        <h3>2. ОПЛАТА ТРУДА</h3>
+        <p>2.1. Работнику устанавливается должностной оклад в размере <strong>{{ base_salary }} рублей</strong>.</p>
+        <p>2.2. Выплата заработной платы производится 2 раза в месяц.</p>
+
+        <h3>3. СРОК ДЕЙСТВИЯ ДОГОВОРА</h3>
+        <p>3.1. Настоящий договор вступает в силу с {{ start_date }} и действует до {{ end_date|default:"заключения сторонами" }}.</p>
+
+        <h3>4. ЗАКЛЮЧИТЕЛЬНЫЕ ПОЛОЖЕНИЯ</h3>
+        <p>4.1. Настоящий договор составлен в двух экземплярах.</p>
+    </div>
+
+    <div class="signature">
+        <p>ПОДПИСИ СТОРОН:</p>
+        <p>Работодатель: <span class="signature-line"></span></p>
+        <p>Работник: <span class="signature-line"></span></p>
+        <p>Дата: {{ date }}</p>
+    </div>
+</body>
+</html>

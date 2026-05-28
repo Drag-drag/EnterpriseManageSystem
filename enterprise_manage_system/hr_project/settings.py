@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'finance',
     'audit',
     'reports',
-    'tasks'
+    'tasks',
+    'security'
 ]
 
 MIDDLEWARE = [
@@ -53,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'audit.middleware.AuditMiddleware',
+    'security.middleware.SecurityAuditMiddleware',
 ]
 
 ROOT_URLCONF = 'hr_project.urls'
@@ -60,10 +62,11 @@ ROOT_URLCONF = 'hr_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],  # добавьте эту строку
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',

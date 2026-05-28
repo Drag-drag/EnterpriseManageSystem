@@ -67,6 +67,8 @@ class Employee(models.Model):
     name = models.CharField(max_length=120, verbose_name='ФИО')
     age = models.IntegerField(max_length=3, verbose_name='Возраст')
     on_vacation = models.BooleanField(default=False, verbose_name='В отпуске')
+    user = models.OneToOneField('auth.User', on_delete=models.SET_NULL, null=True, blank=True, related_name='employee',
+                                   verbose_name="Пользователь")
     position = models.ForeignKey(Position, on_delete=models.CASCADE, related_name='employees', verbose_name='Должность')
     _balance = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, verbose_name='Баланс')
 
