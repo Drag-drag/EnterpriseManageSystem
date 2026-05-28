@@ -30,16 +30,13 @@ def check_role(user, required_roles):
 
 
 def role_required(required_roles):
-
     def decorator(view_func):
         @wraps(view_func)
         def wrapper(request, *args, **kwargs):
             if not check_role(request.user, required_roles):
                 raise PermissionDenied("Доступ запрещён. Требуемая роль: " + ", ".join(required_roles))
             return view_func(request, *args, **kwargs)
-
         return wrapper
-
     return decorator
 
 

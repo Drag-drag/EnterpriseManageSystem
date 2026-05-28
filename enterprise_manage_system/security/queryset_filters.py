@@ -1,6 +1,3 @@
-from django.db.models import Q
-
-
 def filter_employee_queryset_by_user(queryset, user):
     if user.is_superuser:
         return queryset
@@ -9,7 +6,6 @@ def filter_employee_queryset_by_user(queryset, user):
 
     if check_role(user, [ROLE_ADMIN, ROLE_HR_MANAGER, ROLE_ACCOUNTANT, ROLE_AUDITOR]):
         return queryset
-
 
     return queryset.filter(user=user) if hasattr(user, 'employee') else queryset.none()
 

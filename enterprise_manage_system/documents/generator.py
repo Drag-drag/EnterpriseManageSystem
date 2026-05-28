@@ -6,7 +6,6 @@ from finance.models import BankAccount
 
 
 class DocumentGenerator:
-
     def generate_contract(self, employee_id):
         try:
             employee = Employee.objects.get(pk=employee_id)

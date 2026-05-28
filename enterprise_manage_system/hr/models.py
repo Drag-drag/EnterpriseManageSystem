@@ -37,18 +37,10 @@ class Position(models.Model):
     title = models.CharField(max_length=120, verbose_name='Наименование должности')
     base_salary = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Базовая ставка')
     enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE, related_name='positions', verbose_name='Предприятие')
-    departments = models.ManyToManyField('Department', through='PositionDepartment', related_name='positions', blank=True)
 
     def __str__(self):
         return f'{self.title} ({self.enterprise.name})'
 
-class PositionDepartment(models.Model):
-    position = models.ForeignKey(Position, on_delete=models.CASCADE)
-    department = models.ForeignKey(Department, on_delete=models.CASCADE)
-    salary_override = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-
-    class Meta:
-        unique_together = ['position', 'department']
 
 class EmployeeManager(models.Manager):
     def get_by_position(self, position_title):
@@ -102,7 +94,8 @@ class Employment(models.Model):
     ]
 
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='employments', verbose_name='Сотрудник')
-    department = models.ForeignKey(Department, on_delete=models.CASCADE, null=True, blank=True, related_name='employments', verbose_name='Отдел')
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, null=True, blank=True, related_name='employments',
+                                   verbose_name='Отдел')
     external_company = models.CharField(max_length=255, null=True, blank=True, verbose_name='Внешняя компания')
     rate = models.DecimalField(max_digits=3, decimal_places=2, verbose_name='Коэффициент ставки')
     job_type = models.CharField(max_length=20, choices=JOB_TYPE_CHOICES, verbose_name='Тип занятости')

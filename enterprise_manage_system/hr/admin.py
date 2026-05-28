@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Enterprise, Position, Department, PositionDepartment, Employee, Employment, Child
+from .models import Enterprise, Position, Department, Employee, Employment, Child
 
 @admin.register(Enterprise)
 class EnterpriseAdmin(admin.ModelAdmin):
@@ -17,11 +17,6 @@ class DepartmentAdmin(admin.ModelAdmin):
     list_display = ('name', 'enterprise', 'base_salary_override')
     list_filter = ('enterprise',)
     search_fields = ('name',)
-
-@admin.register(PositionDepartment)
-class PositionDepartmentAdmin(admin.ModelAdmin):
-    list_display = ('position', 'department', 'salary_override')
-    list_filter = ('position', 'department')
 
 @admin.register(Employee)
 class EmployeeAdmin(admin.ModelAdmin):

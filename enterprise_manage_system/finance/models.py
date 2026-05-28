@@ -2,7 +2,6 @@ from django.db import models
 from django.db.models import Sum
 from django.core.exceptions import ValidationError
 from hr.models import Employee
-
 from decimal import Decimal
 
 class BankAccount(models.Model):

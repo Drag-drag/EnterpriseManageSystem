@@ -7,7 +7,6 @@ from finance.models import BankAccount, Transaction
 
 
 class ReportGenerator:
-
     def generate_payroll_report(self, department_id=None, month=None):
         if month:
             try:

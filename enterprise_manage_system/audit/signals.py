@@ -22,7 +22,7 @@ def model_to_dict(instance):
 
 
 def log_change(sender, instance, created, **kwargs):
-    from audit.middleware import get_current_user
+    from .middleware import get_current_user
 
     if created:
         action_type = 'create'
